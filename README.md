@@ -228,5 +228,3 @@ python find_lid_fgsm_threshold.py `
 - Run `pipeline.py`
 - Save final outputs in `outputs/`
 - Run `find_lid_fgsm_threshold.py` if the SpeechBrain backend is available
-- Update the report in `report/`
-- Include this repository link, report, code, and readme in the final submission
