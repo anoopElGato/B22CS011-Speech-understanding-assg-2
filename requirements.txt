@@ -1,0 +1,74 @@
+# ============================================================
+# Speech Processing Pipeline — requirements.txt
+# Python 3.9+  |  CUDA 11.8+ recommended for GPU stages
+# ============================================================
+
+# ── Core Scientific Stack ────────────────────────────────────
+numpy>=1.24
+scipy>=1.11
+
+# ── Audio I/O & DSP ─────────────────────────────────────────
+librosa>=0.10.1
+soundfile>=0.12.1
+audioread>=3.0
+
+# ── Deep Learning ───────────────────────────────────────────
+torch>=2.1.0
+torchaudio>=2.1.0
+# Install PyTorch with CUDA:
+#   pip install torch torchaudio --index-url https://download.pytorch.org/whl/cu118
+
+# ── Stage 1: Preprocessing ──────────────────────────────────
+# Spectral subtraction — covered by librosa + numpy (no extra dep)
+# Optional GPU denoiser:
+# deepfilternet>=0.5.6          # pip install deepfilternet
+
+# ── Stage 2: Language Identification ────────────────────────
+speechbrain>=1.0.0              # frame-level LID / VAD models
+langdetect>=1.0.9               # text-based LID fallback
+
+# ── Stage 3: Speech-to-Text ─────────────────────────────────
+openai-whisper>=20231117        # Whisper STT backbone
+transformers>=4.38              # HuggingFace hub / constrained decoding
+accelerate>=0.27
+
+# ── Stage 4: Phonetics (G2P + IPA) ──────────────────────────
+phonemizer>=3.2.1               # espeak-ng backend for G2P / IPA
+epitran>=1.25                   # Hinglish / Devanagari G2P
+gruut>=2.3.1                    # rule-based phonemiser (multilingual)
+cmudict>=1.0.20                 # packaged CMU Pronouncing Dictionary
+
+# ── Stage 5: Translation ────────────────────────────────────
+indic-nlp-library>=0.91        # Indic tokenisation / normalisation
+# CTranslate2 for fast inference of Helsinki NLP MT models:
+ctranslate2>=3.24.0
+sentencepiece>=0.1.99
+
+# ── Stage 6: TTS (VITS / YourTTS voice cloning) ─────────────
+# Coqui XTTS/YourTTS is effectively a Python <= 3.11 dependency.
+TTS>=0.22.0; python_version < "3.12"
+
+# ── Stage 7: Prosody ─────────────────────────────────────────
+pyworld>=0.3.4                  # WORLD vocoder F0 extraction
+praat-parselmouth>=0.4.3        # Praat-based F0 / energy
+fastdtw>=0.3.4                  # DTW alignment
+
+# ── Stage 8: Anti-spoofing ───────────────────────────────────
+# LFCC / CQCC features computed manually; classifier via sklearn or torch
+scikit-learn>=1.4
+
+# ── Stage 9: Evaluation ──────────────────────────────────────
+jiwer>=3.0.3                    # WER / CER
+pystoi>=0.3.3                   # STOI (speech intelligibility)
+pesq>=0.0.4                     # PESQ MOS score
+# MCD (Mel Cepstral Distortion) — computed with numpy/scipy in evaluation/
+# EER — computed from sklearn's roc_curve in evaluation/
+
+# ── Utilities ────────────────────────────────────────────────
+tqdm>=4.66
+rich>=13.7                      # pretty CLI output
+pydantic>=2.6                   # config validation
+click>=8.1                      # CLI
+python-dotenv>=1.0
+
+resemblyzer>=0.1.4              # d-vector speaker embeddings
