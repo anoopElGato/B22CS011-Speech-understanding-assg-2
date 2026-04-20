@@ -128,7 +128,7 @@ python pipeline.py `
   Optional Hugging Face MMS/VITS model override.
 
 - `--resume_from_transcript`
-  Skip STT and load a transcript from file.
+  Skip STT and load a transcript from file. Transcripting can take a lot of time itself. So if you already have a transcript you can continue after transcripting.
 
 - `--transcript_file`
   Transcript path used together with `--resume_from_transcript`.
