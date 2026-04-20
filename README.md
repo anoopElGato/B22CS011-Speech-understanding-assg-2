@@ -222,7 +222,6 @@ python find_lid_fgsm_threshold.py `
 - The FGSM script requires the differentiable SpeechBrain LID backend. If the LID module falls back to Whisper, FGSM threshold search will fail.
 - `mms` TTS may require a locally cached Hugging Face model if network access is blocked.
 - `coqui` TTS is best used in Python 3.11 environments.
-- The repository currently contains prototype outputs, so some metrics may not yet satisfy the assignment thresholds.
 
 ## Quick Submission Checklist
 
